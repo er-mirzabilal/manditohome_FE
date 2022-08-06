@@ -26,7 +26,7 @@ export const PlaceOrderAction: React.FC<{ className?: string }> = (props) => {
   const { items } = useCart();
   const [
     {
-      billing_address,
+      // billing_address,
       shipping_address,
       delivery_time,
       coupon,
@@ -84,9 +84,9 @@ export const PlaceOrderAction: React.FC<{ className?: string }> = (props) => {
       customer_contact,
       payment_gateway,
       use_wallet_points,
-      billing_address: {
-        ...(billing_address?.address && billing_address.address),
-      },
+      // billing_address: {
+      //   ...(billing_address?.address && billing_address.address),
+      // },
       shipping_address: {
         ...(shipping_address?.address && shipping_address.address),
       },
@@ -96,7 +96,7 @@ export const PlaceOrderAction: React.FC<{ className?: string }> = (props) => {
       input.token = token;
     }
 
-    delete input.billing_address.__typename;
+    // delete input.billing_address.__typename;
     delete input.shipping_address.__typename;
     //@ts-ignore
     createOrder(input);
@@ -110,7 +110,7 @@ export const PlaceOrderAction: React.FC<{ className?: string }> = (props) => {
     : [
         customer_contact,
         payment_gateway,
-        billing_address,
+        // billing_address,
         shipping_address,
         delivery_time,
         available_items,

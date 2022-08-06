@@ -39,7 +39,7 @@ export default function CheckoutPage() {
               count={1}
             />
 
-            <AddressGrid
+            {/* <AddressGrid
               userId={id!}
               className="p-5 bg-light shadow-700 md:p-8"
               label={t('text-billing-address')}
@@ -50,12 +50,12 @@ export default function CheckoutPage() {
               )}
               atom={billingAddressAtom}
               type={AddressType.Billing}
-            />
+            /> */}
             <AddressGrid
               userId={me?.id!}
               className="p-5 bg-light shadow-700 md:p-8"
               label={t('text-shipping-address')}
-              count={3}
+              count={2}
               //@ts-ignore
               addresses={address?.filter(
                 (item) => item?.type === AddressType.Shipping
@@ -66,7 +66,7 @@ export default function CheckoutPage() {
             <ScheduleGrid
               className="p-5 bg-light shadow-700 md:p-8"
               label={t('text-delivery-schedule')}
-              count={4}
+              count={3}
             />
           </div>
           <div className="w-full mt-10 mb-10 sm:mb-12 lg:mb-0 lg:w-96">

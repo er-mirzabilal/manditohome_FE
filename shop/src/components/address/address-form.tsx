@@ -9,15 +9,17 @@ import { useModalState } from '@/components/ui/modal/modal.context';
 import { Form } from '@/components/ui/forms/form';
 import { AddressType } from '@/framework/utils/constants';
 import { useUpdateUser } from '@/framework/user';
+import Select from '../ui/select/select';
 
 type FormValues = {
   title: string;
   type: AddressType;
   address: {
-    country: string;
-    city: string;
-    state: string;
-    zip: string;
+    // country: string;
+    // city: string;
+    // state: string;
+    // zip: string;
+    town: string;
     street_address: string;
   };
 };
@@ -27,12 +29,13 @@ const addressSchema = yup.object().shape({
     .string()
     .oneOf([AddressType.Billing, AddressType.Shipping])
     .required('error-type-required'),
-  title: yup.string().required('error-title-required'),
+  // title: yup.string().required('error-title-required'),
   address: yup.object().shape({
-    country: yup.string().required('error-country-required'),
-    city: yup.string().required('error-city-required'),
-    state: yup.string().required('error-state-required'),
-    zip: yup.string().required('error-zip-required'),
+    // country: yup.string().required('error-country-required'),
+    // city: yup.string().required('error-city-required'),
+    // state: yup.string().required('error-state-required'),
+    // zip: yup.string().required('error-zip-required'),
+    town: yup.string().required('error-town-required'),
     street_address: yup.string().required('error-street-required'),
   }),
 });
@@ -43,7 +46,9 @@ export const AddressForm: React.FC<any> = ({
   isLoading,
 }) => {
   const { t } = useTranslation('common');
-
+  const {
+    data: { customerId, address, type },
+  } = useModalState();
   return (
     <Form<FormValues>
       onSubmit={onSubmit}
@@ -61,39 +66,42 @@ export const AddressForm: React.FC<any> = ({
           <div>
             <Label>{t('text-type')}</Label>
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <Radio
+              {/* <Radio
                 id="billing"
                 {...register('type')}
                 type="radio"
                 value={AddressType.Billing}
                 label={t('text-billing')}
-              />
+              /> */}
               <Radio
                 id="shipping"
                 {...register('type')}
                 type="radio"
                 value={AddressType.Shipping}
                 label={t('text-shipping')}
+                
               />
             </div>
           </div>
 
           <Input
-            label={t('text-title')}
+            // label={t('text-title')}
             {...register('title')}
             error={t(errors.title?.message!)}
             variant="outline"
             className="col-span-2"
+            value="Shipping"
+            style={{display:'none'}}
           />
 
-          <Input
+          {/* <Input
             label={t('text-country')}
             {...register('address.country')}
             error={t(errors.address?.country?.message!)}
             variant="outline"
-          />
+          /> */}
 
-          <Input
+          {/* <Input
             label={t('text-city')}
             {...register('address.city')}
             error={t(errors.address?.city?.message!)}
@@ -112,8 +120,13 @@ export const AddressForm: React.FC<any> = ({
             {...register('address.zip')}
             error={t(errors.address?.zip?.message!)}
             variant="outline"
+          /> */}
+          <Input
+          label={t('text-town')}
+          {...register('address.town')}
+          error={t(errors.address?.town?.message!)}
+          variant="outline"
           />
-
           <TextArea
             label={t('text-street-address')}
             {...register('address.street_address')}
@@ -123,7 +136,7 @@ export const AddressForm: React.FC<any> = ({
           />
 
           <Button
-            className="col-span-2 w-full"
+            className="w-full col-span-2"
             loading={isLoading}
             disabled={isLoading}
           >
@@ -147,8 +160,8 @@ export default function CreateOrUpdateAddressForm() {
     const formattedInput = {
       id: address?.id,
       // customer_id: customerId,
-      title: values.title,
-      type: values.type,
+      title: "Shipping",
+      type: "shipping",
       address: {
         ...values.address,
       },
@@ -159,8 +172,8 @@ export default function CreateOrUpdateAddressForm() {
     });
   }
   return (
-    <div className="min-h-screen bg-light p-5 sm:p-8 md:min-h-0 md:rounded-xl">
-      <h1 className="mb-4 text-center text-lg font-semibold text-heading sm:mb-6">
+    <div className="min-h-screen p-5 bg-light sm:p-8 md:min-h-0 md:rounded-xl">
+      <h1 className="mb-4 text-lg font-semibold text-center text-heading sm:mb-6">
         {address ? t('text-update') : t('text-add-new')} {t('text-address')}
       </h1>
       <AddressForm

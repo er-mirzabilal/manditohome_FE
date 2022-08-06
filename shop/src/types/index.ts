@@ -362,10 +362,11 @@ export interface Address {
   type: any;
   address: {
     __typename?: string;
-    country: string;
-    city: string;
-    state: string;
-    zip: string;
+    // country: string;
+    // city: string;
+    // state: string;
+    // zip: string;
+    town: string;
     street_address: string;
   };
 }
