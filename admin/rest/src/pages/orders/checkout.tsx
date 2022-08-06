@@ -60,10 +60,10 @@ export default function CheckoutPage() {
             //@ts-ignore
             contact={user?.profile?.contact}
             label={t("text-contact-number")}
-            count={1}
+            count={2}
           />
 
-          <AddressGrid
+          {/* <AddressGrid
             userId={user?.id!}
             className="p-5 shadow-700 bg-light md:p-8"
             label={t("text-billing-address")}
@@ -74,7 +74,7 @@ export default function CheckoutPage() {
             )}
             atom={billingAddressAtom}
             type={AddressType.Billing}
-          />
+          /> */}
           <AddressGrid
             userId={user?.id!}
             className="p-5 shadow-700 bg-light md:p-8"

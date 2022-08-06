@@ -27,6 +27,7 @@ export enum AddressType {
   Shipping = "shipping",
 }
 
+export const TownNames=['Climax Town','Shalimar Town','Garden Town'];
 
 
 export declare type Address = {
@@ -38,12 +39,13 @@ export declare type Address = {
   customer?: Maybe<User>;
 };
 export declare type UserAddress = {
-  country?: Maybe<Scalars["String"]>;
-  city?: Maybe<Scalars["String"]>;
-  state?: Maybe<Scalars["String"]>;
-  zip?: Maybe<Scalars["String"]>;
+  // country?: Maybe<Scalars["String"]>;
+  // city?: Maybe<Scalars["String"]>;
+  // state?: Maybe<Scalars["String"]>;
+  // zip?: Maybe<Scalars["String"]>;
+  town?: Maybe<Scalars["String"]>;
   street_address?: Maybe<Scalars["String"]>;
-  areas?:[];
+  // areas?:[];
 };
 export declare type MakeAdminInput = {
   user_id: Scalars["ID"];

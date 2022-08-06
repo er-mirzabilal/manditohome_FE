@@ -285,6 +285,7 @@
   "button-label-add-delivery-time": "Add Delivery Time",
   "error-min-one-banner": "Add at least one banner",
   "error-title-required": "Title is required",
+  "error-town-required": "Town is required",
   "input-label-min-order-amount": "Minimum Order Amount",
   "input-banner": "Banner",
   "input-label-product-card-type": "Select Product Card",

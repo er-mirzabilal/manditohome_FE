@@ -13,7 +13,7 @@ interface AddressProps {
 const AddressCard: React.FC<AddressProps> = ({ checked, address, userId }) => {
   const { t } = useTranslation();
   const { openModal } = useModalAction();
-
+  
   function onEdit() {
     openModal("ADD_OR_UPDATE_ADDRESS", { customerId: userId, address });
   }
@@ -27,13 +27,13 @@ const AddressCard: React.FC<AddressProps> = ({ checked, address, userId }) => {
         }
       )}
     >
-      <p className="text-sm text-heading font-semibold mb-3 capitalize">
-        {address.title}
+      <p className="mb-3 text-sm font-semibold capitalize text-heading">
+        {address.address.town}
       </p>
       <p className="text-sm text-sub-heading">
         {formatAddress(address.address)}
       </p>
-      <div className="absolute top-4 end-4 flex space-s-2 opacity-0 group-hover:opacity-100">
+      <div className="absolute flex opacity-0 top-4 end-4 space-s-2 group-hover:opacity-100">
         {onEdit && (
           <button
             className="flex items-center justify-center w-5 h-5 rounded-full bg-accent text-light"

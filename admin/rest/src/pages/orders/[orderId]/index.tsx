@@ -149,7 +149,7 @@ export default function OrderDetailsPage() {
     <Card>
       <div className="flex w-full">
         <PDFDownloadLink
-          className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 text-light border border-transparent px-5 py-0 h-12 ms-auto mb-5 bg-blue-500 hover:bg-blue-600"
+          className="inline-flex items-center justify-center flex-shrink-0 h-12 px-5 py-0 mb-5 font-semibold leading-none transition duration-300 ease-in-out bg-blue-500 border border-transparent rounded outline-none focus:outline-none focus:shadow focus:ring-1 focus:ring-accent-700 text-light ms-auto hover:bg-blue-600"
           document={
             <InvoicePdf
               subtotal={subtotal}
@@ -168,7 +168,7 @@ export default function OrderDetailsPage() {
               t("common:text-loading")
             ) : (
               <>
-                <DownloadIcon className="h-4 w-4 me-3" />
+                <DownloadIcon className="w-4 h-4 me-3" />
                 {t("common:text-download")} {t("common:text-invoice")}
               </>
             )
@@ -176,16 +176,16 @@ export default function OrderDetailsPage() {
         </PDFDownloadLink>
       </div>
 
-      <div className="flex flex-col lg:flex-row items-center">
-        <h3 className="text-2xl font-semibold text-heading text-center lg:text-start w-full lg:w-1/3 mb-8 lg:mb-0 whitespace-nowrap">
+      <div className="flex flex-col items-center lg:flex-row">
+        <h3 className="w-full mb-8 text-2xl font-semibold text-center text-heading lg:text-start lg:w-1/3 lg:mb-0 whitespace-nowrap">
           {t("form:input-label-order-id")} - {data?.order?.tracking_number}
         </h3>
 
         <form
           onSubmit={handleSubmit(ChangeStatus)}
-          className="flex items-start ms-auto w-full lg:w-2/4"
+          className="flex items-start w-full ms-auto lg:w-2/4"
         >
-          <div className="w-full me-5 z-20">
+          <div className="z-20 w-full me-5">
             <SelectInput
               name="order_status"
               control={control}
@@ -208,7 +208,7 @@ export default function OrderDetailsPage() {
         </form>
       </div>
 
-      <div className="my-5 lg:my-10 flex justify-center items-center">
+      <div className="flex items-center justify-center my-5 lg:my-10">
         <ProgressBox
           data={orderStatusData?.order_statuses?.data}
           status={data?.order?.status?.serial!}
@@ -229,7 +229,7 @@ export default function OrderDetailsPage() {
           <span>{t("common:no-order-found")}</span>
         )}
 
-        <div className="border-t-4 border-double border-border-200 flex flex-col w-full sm:w-1/2 md:w-1/3 ms-auto px-4 py-4 space-y-2">
+        <div className="flex flex-col w-full px-4 py-4 space-y-2 border-t-4 border-double border-border-200 sm:w-1/2 md:w-1/3 ms-auto">
           <div className="flex items-center justify-between text-sm text-body">
             <span>{t("common:order-sub-total")}</span>
             <span>{subtotal}</span>
@@ -246,7 +246,7 @@ export default function OrderDetailsPage() {
             <span>{t("common:order-discount")}</span>
             <span>{discount}</span>
           </div>
-          <div className="flex items-center justify-between text-base text-heading font-semibold">
+          <div className="flex items-center justify-between text-base font-semibold text-heading">
             <span>{t("common:order-total")}</span>
             <span>{total}</span>
           </div>
@@ -254,12 +254,12 @@ export default function OrderDetailsPage() {
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
-        <div className="w-full sm:w-1/2 sm:pe-8 mb-10 sm:mb-0">
-          <h3 className="text-heading font-semibold mb-3 pb-2 border-b border-border-200">
+        <div className="w-full mb-10 sm:w-1/2 sm:pe-8 sm:mb-0">
+          {/* <h3 className="pb-2 mb-3 font-semibold border-b text-heading border-border-200">
             {t("common:billing-address")}
           </h3>
 
-          <div className="text-sm text-body flex flex-col items-start space-y-1">
+          <div className="flex flex-col items-start space-y-1 text-sm text-body">
             <span>{data?.order?.customer?.name}</span>
             {data?.order?.billing_address && (
               <span>{formatAddress(data.order.billing_address)}</span>
@@ -267,15 +267,15 @@ export default function OrderDetailsPage() {
             {data?.order?.customer_contact && (
               <span>{data?.order?.customer_contact}</span>
             )}
-          </div>
+          </div> */}
         </div>
 
         <div className="w-full sm:w-1/2 sm:ps-8">
-          <h3 className="text-heading text-start font-semibold sm:text-end mb-3 pb-2 border-b border-border-200">
+          <h3 className="pb-2 mb-3 font-semibold border-b text-heading text-start sm:text-end border-border-200">
             {t("common:shipping-address")}
           </h3>
 
-          <div className="text-sm text-body text-start sm:text-end flex flex-col items-start sm:items-end space-y-1">
+          <div className="flex flex-col items-start space-y-1 text-sm text-body text-start sm:text-end sm:items-end">
             <span>{data?.order?.customer?.name}</span>
             {data?.order?.shipping_address && (
               <span>{formatAddress(data.order.shipping_address)}</span>

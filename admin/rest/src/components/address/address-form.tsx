@@ -14,11 +14,12 @@ type FormValues = {
   title: string;
   type: AddressType;
   address: {
-    country: string;
-    city: string;
-    state: string;
-    zip: string;
+    // country: string;
+    // city: string;
+    // state: string;
+    // zip: string;
     street_address: string;
+    town: string;
   };
 };
 
@@ -27,12 +28,13 @@ const addressSchema = yup.object().shape({
     .string()
     .oneOf([AddressType.Billing, AddressType.Shipping])
     .required("error-type-required"),
-  title: yup.string().required("error-title-required"),
+  // title: yup.string().required("error-title-required"),
   address: yup.object().shape({
-    country: yup.string().required("error-country-required"),
-    city: yup.string().required("error-city-required"),
-    state: yup.string().required("error-state-required"),
-    zip: yup.string().required("error-zip-required"),
+    // country: yup.string().required("error-country-required"),
+    // city: yup.string().required("error-city-required"),
+    // state: yup.string().required("error-state-required"),
+    // zip: yup.string().required("error-zip-required"),
+    town: yup.string().required("error-town-required"),
     street_address: yup.string().required("error-street-required"),
   }),
 });
@@ -54,13 +56,13 @@ const AddressForm: React.FC<any> = ({ onSubmit }) => {
         options={{
           shouldUnregister: true,
           defaultValues: {
-            title: address?.title ?? "",
+            title: address?.title ?? "Shipping",
             type: address?.type ?? type,
             ...(address?.address && address),
           },
         }}
         resetValues={{
-          title: address?.title ?? "",
+          title: address?.title ?? "Shipping",
           type: address?.type ?? type,
           ...(address?.address && address),
         }}
@@ -70,13 +72,13 @@ const AddressForm: React.FC<any> = ({ onSubmit }) => {
             <div>
               <Label>{t("text-type")}</Label>
               <div className="flex items-center space-s-4">
-                <Radio
+                {/* <Radio
                   id="billing"
                   {...register("type")}
                   type="radio"
                   value={AddressType.Billing}
                   label={t("text-billing")}
-                />
+                /> */}
                 <Radio
                   id="shipping"
                   {...register("type")}
@@ -88,41 +90,49 @@ const AddressForm: React.FC<any> = ({ onSubmit }) => {
             </div>
 
             <Input
-              label={t("text-title")}
+              // label={t("text-title")}
               {...register("title")}
               error={t(errors.title?.message!)}
               variant="outline"
               className="col-span-2"
+              value="Shipping"
+              style={{display:'none'}}
             />
+            <Input label={t("text-town")}
+             {...register("address.town")}
+             error={t(errors.address?.town?.message!)}
+             variant="outline"
+             className="col-span-2"
+             />
 
-            <Input
+            {/* <Input
               label={t("text-country")}
               {...register("address.country")}
               error={t(errors.address?.country?.message!)}
               variant="outline"
-            />
+            /> */}
 
-            <Input
+            {/* <Input
               label={t("text-city")}
               {...register("address.city")}
               error={t(errors.address?.city?.message!)}
               variant="outline"
-            />
+            /> */}
 
-            <Input
+            {/* <Input
               label={t("text-state")}
               {...register("address.state")}
               error={t(errors.address?.state?.message!)}
               variant="outline"
-            />
+            /> */}
 
-            <Input
+            {/* <Input
               label={t("text-zip")}
               {...register("address.zip")}
               error={t(errors.address?.zip?.message!)}
               variant="outline"
-            />
-
+            /> */}
+             
             <TextArea
               label={t("text-street-address")}
               {...register("address.street_address")}
