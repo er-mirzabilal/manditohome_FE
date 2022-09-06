@@ -39,16 +39,16 @@ export const CheckAvailabilityAction: React.FC = (props) => {
   // }
 
   function handleVerifyCheckout() {
-    if (billing_address && shipping_address) {
+    if (shipping_address) {
       verifyCheckout(
         {
           amount: total,
           customer_id: customer?.value,
           products: items?.map((item) => formatOrderedProduct(item)),
-          billing_address: {
-            ...(billing_address?.address &&
-              omit(billing_address.address, ["__typename"])),
-          },
+          // billing_address: {
+          //   ...(billing_address?.address &&
+          //     omit(billing_address.address, ["__typename"])),
+          // },
           shipping_address: {
             ...(shipping_address?.address &&
               omit(shipping_address.address, ["__typename"])),

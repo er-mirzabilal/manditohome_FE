@@ -6,7 +6,7 @@ export type VerifyCheckoutInputType = {
   amount: number;
   customer_id: string;
   products: any[];
-  billing_address: any;
+  // billing_address: any;
   shipping_address: any;
 };
 

@@ -48,7 +48,7 @@ export const PlaceOrderAction: React.FC = (props) => {
   const { items } = useCart();
   const [
     {
-      billing_address,
+      // billing_address,
       shipping_address,
       delivery_time,
       coupon,
@@ -108,9 +108,9 @@ export const PlaceOrderAction: React.FC = (props) => {
       customer_id: customer?.value,
       use_wallet_points,
       payment_gateway,
-      billing_address: {
-        ...(billing_address?.address && billing_address.address),
-      },
+      // billing_address: {
+      //   ...(billing_address?.address && billing_address.address),
+      // },
       shipping_address: {
         ...(shipping_address?.address && shipping_address.address),
       },
@@ -152,7 +152,7 @@ export const PlaceOrderAction: React.FC = (props) => {
     customer,
     customer_contact,
     payment_gateway,
-    billing_address,
+    // billing_address,
     shipping_address,
     delivery_time,
     available_items,

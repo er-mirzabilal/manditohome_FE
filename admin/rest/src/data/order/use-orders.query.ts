@@ -21,7 +21,9 @@ const fetchOrders = async ({ queryKey }: QueryParamsType) => {
   });
   let url = `${API_ENDPOINTS.ORDERS}?search=${searchString}&shop_id=${shop_id}&page=${page}&limit=${limit}&orderBy=${orderBy}&sortedBy=${sortedBy}`;
   if(fromDate && toDate)
-  url = `${API_ENDPOINTS.ORDERS}?search=${searchString}&page=${page}&limit=${limit}&orderBy=${orderBy}&sortedBy=${sortedBy}&fromDate=${fromDate.toLocaleDateString()}&toDate=${toDate.toLocaleDateString()}`;
+  {
+    url += `&fromDate=${fromDate.toLocaleDateString()}&toDate=${toDate.toLocaleDateString()}`;
+  }
   const {
     data: { data, ...rest },
   } = await Orders.all(url);
