@@ -18,10 +18,12 @@ import { useExportOrder } from "@data/order/use-export-order.query";
 import { Menu, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { DownloadIcon } from "@components/icons/download-icon";
-import {DatePicker} from "@components/ui/date-picker";
-
+import { DatePicker } from "@components/ui/date-picker";
+import Button from "@components/ui/button";
+import { useModalAction } from "@components/ui/modal/modal.context";
 
 export default function Orders() {
+  const { openModal } = useModalAction();
   const router = useRouter();
   const {
     query: { shop },
@@ -35,8 +37,8 @@ export default function Orders() {
   const shopId = shopData?.shop?.id!;
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
-  const [fromDate, setFromDate] = useState(new Date);
-  const [toDate, setToDate] = useState(new Date);
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
   const {
     data,
     isLoading: loading,
@@ -56,7 +58,6 @@ export default function Orders() {
       enabled: Boolean(shopId),
     }
   );
-
   const { refetch } = useExportOrder(
     {
       ...(shopId && { shop_id: shopId }),
@@ -86,6 +87,28 @@ export default function Orders() {
     setPage(current);
   }
 
+  let orderedProducts: any = [];
+  if (data?.orders?.data.length) {
+    const allProducts = data?.orders?.data?.flatMap(
+      (item: any) => item?.products
+    );
+
+    allProducts.map((item: any) => {
+      let findElements = orderedProducts.filter(
+        (prod: any) => item?.id === prod?.id
+      );
+      if (findElements?.length) {
+        findElements[0].product_quantity += Number(item?.pivot?.order_quantity);
+      } else {
+        orderedProducts.push({
+          id: item?.id,
+          product_name: item?.name,
+          product_quantity: Number(item?.pivot?.order_quantity),
+        });
+      }
+    });
+  }
+
   return (
     <>
       <Card className="flex flex-col items-center justify-between mb-8 md:flex-row">
@@ -99,12 +122,12 @@ export default function Orders() {
           <Search onSearch={handleSearch} />
         </div>
         <div className="flex items-center w-full mb-6 ml-auto md:w-1/4">
-          <div className='px-1'>
+          <div className="px-1">
             <label>From</label>
-          <DatePicker
+            <DatePicker
               dateFormat="dd/MM/yyyy"
-              onChange={(date:any)=> setFromDate(date) }
-              onBlur={()=>{}}
+              onChange={(date: any) => setFromDate(date)}
+              onBlur={() => {}}
               selected={fromDate}
               selectsStart
               // minDate={new Date()}
@@ -112,15 +135,15 @@ export default function Orders() {
               // startDate={active_from}
               // endDate={expire_at}
               className="border border-gray-300"
-          />
+            />
           </div>
-          <div className='px-1'>
+          <div className="px-1">
             <label>To</label>
 
             <DatePicker
               dateFormat="dd/MM/yyyy"
-              onChange={(date:any)=> setToDate(date)}
-              onBlur={()=>{}}
+              onChange={(date: any) => setToDate(date)}
+              onBlur={() => {}}
               selected={toDate}
               selectsStart
               // minDate={new Date()}
@@ -128,12 +151,19 @@ export default function Orders() {
               // startDate={active_from}
               // endDate={expire_at}
               className="border border-gray-300"
-          />
+            />
           </div>
-          {/* <div className='px-1'>
-              <Button onClick={() => setOpen(true)}> + </Button>
-          </div> */}
+          <div className="px-1 self-end">
+            <Button
+              onClick={() =>
+                openModal("ORDERED_PRODUCTS_COUNT", orderedProducts)
+              }
+            >
+              {" "}
+              +{" "}
+            </Button>
           </div>
+        </div>
         <Menu
           as="div"
           className="relative inline-block ltr:text-left rtl:text-right"

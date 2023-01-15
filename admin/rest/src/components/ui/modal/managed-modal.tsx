@@ -94,6 +94,8 @@ const ProductVariation = dynamic(
   () => import("@components/product/variation/variation")
 );
 const AbuseReport = dynamic(() => import("@components/reviews/abuse-report"));
+const OrderedProductsCount = dynamic(() => import("@components/order/ordered-products-count"));
+
 
 function renderModal(view: MODAL_VIEWS | undefined, data: any) {
   switch (view) {
@@ -163,6 +165,8 @@ function renderModal(view: MODAL_VIEWS | undefined, data: any) {
       return <ReviewImageModal />;
     case "ABUSE_REPORT":
       return <AbuseReport data={data} />;
+    case "ORDERED_PRODUCTS_COUNT":
+      return <OrderedProductsCount data={data}/>;
     default:
       return null;
   }
