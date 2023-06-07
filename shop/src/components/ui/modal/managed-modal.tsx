@@ -44,6 +44,9 @@ const ProductVariation = dynamic(
 const ReviewImageModal = dynamic(
   () => import('@/components/reviews/review-image-modal')
 );
+const AreaSelectModal = dynamic(
+  () => import('@/components/layouts/area-select-modal')
+);
 
 const ManagedModal = () => {
   const { isOpen, view, data } = useModalState();
@@ -66,7 +69,7 @@ const ManagedModal = () => {
       {view === 'ADD_OR_UPDATE_PROFILE_CONTACT' && (
         <ProfileAddOrUpdateContact />
       )}
-      {view === 'DELETE_ADDRESS' && <AddressDeleteView />}
+      {view === 'DELETE_ADDLOGIN_VIEWRESS' && <AddressDeleteView />}
       {view === 'PRODUCT_DETAILS' && (
         <ProductDetailsModalView productSlug={data} />
       )}
@@ -84,6 +87,7 @@ const ManagedModal = () => {
         <ProductVariation productSlug={data} />
       )}
       {view === 'REVIEW_IMAGE_POPOVER' && <ReviewImageModal />}
+      {view === 'AREA_SELECT' && <AreaSelectModal />}
     </Modal>
   );
 };

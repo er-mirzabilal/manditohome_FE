@@ -10,6 +10,8 @@ import { Form } from '@/components/ui/forms/form';
 import { AddressType } from '@/framework/utils/constants';
 import { useUpdateUser } from '@/framework/user';
 import Select from '../ui/select/select';
+import { TownNames } from '@/types';
+import SelectBox from '@/components/ui/forms/select-box';
 
 type FormValues = {
   title: string;
@@ -121,11 +123,19 @@ export const AddressForm: React.FC<any> = ({
             error={t(errors.address?.zip?.message!)}
             variant="outline"
           /> */}
-          <Input
+          {/* <Input
           label={t('text-town')}
           {...register('address.town')}
           error={t(errors.address?.town?.message!)}
           variant="outline"
+          /> */}
+          <SelectBox 
+          label={t('text-town')}
+          {...register('address.town')}
+          error={t(errors.address?.town?.message!)}
+          variant="outline"
+          // className="w-full"
+          options={TownNames}
           />
           <TextArea
             label={t('text-street-address')}

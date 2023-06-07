@@ -7,9 +7,11 @@ import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { authorizationAtom } from '@/store/authorization-atom';
 import { useIsHomePage } from '@/lib/use-is-homepage';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import GroupsDropdownMenu from './menu/groups-menu';
 import { useHeaderSearch } from '@/layouts/headers/header-search-atom';
+import { useModalAction } from '@/components/ui/modal/modal.context';
+import {useUser} from "@/framework/user";
 const Search = dynamic(() => import('@/components/ui/search/search'));
 const AuthorizedMenu = dynamic(() => import('./menu/authorized-menu'), {
   ssr: false,
@@ -22,6 +24,21 @@ const Header = ({ layout }: { layout: string }) => {
   const [displayMobileHeaderSearch] = useAtom(displayMobileHeaderSearchAtom);
   const [isAuthorize] = useAtom(authorizationAtom);
   const isHomePage = useIsHomePage();
+  const { openModal } = useModalAction();
+  const { me } = useUser();
+
+  useEffect(()=>{
+    console.log('useEffect called',me);
+    if(!me)
+    {
+      const town = localStorage.getItem('user_area');
+      if(!town)
+      {
+        openModal('AREA_SELECT')
+      }
+    }
+    console.log(town,'town');
+  },[me])
   // useEffect(() => {
   //   if (!isHomePage) {
   //     hideHeaderSearch();

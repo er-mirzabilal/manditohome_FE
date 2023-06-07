@@ -33,6 +33,7 @@ export default function GuestCheckoutPage() {
   const [, resetCheckout] = useAtom(clearCheckoutAtom);
   const [billingAddress] = useAtom(billingAddressAtom);
   const [shippingAddress] = useAtom(shippingAddressAtom);
+  console.log(shippingAddress);
   useEffect(() => {
     resetCheckout();
   }, [resetCheckout]);
@@ -50,18 +51,18 @@ export default function GuestCheckoutPage() {
               count={1}
             />
 
-            <GuestAddressGrid
+            {/* <GuestAddressGrid
               className="bg-light p-5 shadow-700 md:p-8"
               label={t('text-billing-address')}
               count={2}
               addresses={billingAddress ? [billingAddress] : []}
               atom={billingAddressAtom}
               type={AddressType.Billing}
-            />
+            /> */}
             <GuestAddressGrid
               className="bg-light p-5 shadow-700 md:p-8"
               label={t('text-shipping-address')}
-              count={3}
+              count={2}
               addresses={shippingAddress ? [shippingAddress] : []}
               atom={shippingAddressAtom}
               type={AddressType.Shipping}
@@ -69,7 +70,7 @@ export default function GuestCheckoutPage() {
             <ScheduleGrid
               className="bg-light p-5 shadow-700 md:p-8"
               label={t('text-delivery-schedule')}
-              count={4}
+              count={3}
             />
           </div>
           <div className="mt-10 mb-10 w-full sm:mb-12 lg:mb-0 lg:w-96">

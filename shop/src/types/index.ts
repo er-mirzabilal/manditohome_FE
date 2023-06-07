@@ -630,3 +630,10 @@ export interface DownloadableFilePaginator
   extends PaginatorInfo<DownloadableFile> {}
 
 export interface WishlistPaginator extends PaginatorInfo<Wishlist> {}
+
+export const TownNames =  [
+  "",
+  "Climax Town",
+  "Shalimar Town",
+  "Garden Town"
+]

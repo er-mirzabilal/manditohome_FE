@@ -419,5 +419,6 @@
   "text-answer": "Answer",
   "text-message": "Message",
   "profile-sidebar-my-questions": "My Questions",
-  "profile-sidebar-my-reports": "My Reports"
+  "profile-sidebar-my-reports": "My Reports",
+  "town-select-helper": "Please select your Town from dropdown"
 }
