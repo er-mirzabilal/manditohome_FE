@@ -36,6 +36,7 @@ export const PlaceOrderAction: React.FC<{ className?: string }> = (props) => {
       token,
     },
   ] = useAtom(checkoutAtom);
+  console.log(shipping_address, 'shipping_address test');
   const [discount] = useAtom(discountAtom);
   const [use_wallet_points] = useAtom(walletAtom);
 

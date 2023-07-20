@@ -9,7 +9,7 @@ import { getLayout } from '@/components/layouts/layout';
 import { AddressType } from '@/framework/utils/constants';
 import Seo from '@/components/seo/seo';
 import { useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export { getStaticProps } from '@/framework/general.ssr';
 
@@ -28,6 +28,10 @@ const RightSideView = dynamic(
 );
 
 export default function GuestCheckoutPage() {
+  interface Address {
+    town: string;
+    street: string;
+  }
   // const { me } = useUser();
   const { t } = useTranslation();
   const [, resetCheckout] = useAtom(clearCheckoutAtom);
@@ -37,6 +41,39 @@ export default function GuestCheckoutPage() {
   useEffect(() => {
     resetCheckout();
   }, [resetCheckout]);
+  const [storedAddresses, setStoredAddresses] = useState<Address[]>();
+
+  console.log(storedAddresses, 'storedAddresses');
+
+  useEffect(() => {
+    const addressesFromStorage = localStorage.getItem('user_area');
+    if (addressesFromStorage) {
+      try {
+        const parsedAddresses = JSON.parse(addressesFromStorage);
+        setStoredAddresses(parsedAddresses);
+      } catch (error) {
+        // Handle the error if JSON parsing fails
+        console.error('Error parsing addresses from local storage:', error);
+      }
+    }
+  }, []);
+
+  const defaultAddress = {
+    title: '',
+    type: 'shipping',
+    address: {
+      town: storedAddresses?.town || 'dummy',
+      street_address: storedAddresses?.street || 'St  dummy',
+    },
+  };
+  // const defaultAddress = {
+  //   title: '',
+  //   type: 'shipping',
+  //   address: {
+  //     town: storedAddresses?.[0]?.town || 'dummy', // Accessing the first address in the array
+  //     street_address: storedAddresses?.[0]?.street || 'St dummy', // Accessing the first address in the array
+  //   },
+  // };
 
   return (
     <>
@@ -63,7 +100,8 @@ export default function GuestCheckoutPage() {
               className="bg-light p-5 shadow-700 md:p-8"
               label={t('text-shipping-address')}
               count={2}
-              addresses={shippingAddress ? [shippingAddress] : []}
+              // addresses={shippingAddress ? [shippingAddress] : []}
+              addresses={shippingAddress ? [shippingAddress] : [defaultAddress]}
               atom={shippingAddressAtom}
               type={AddressType.Shipping}
             />

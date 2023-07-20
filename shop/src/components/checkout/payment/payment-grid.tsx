@@ -21,12 +21,12 @@ const AVAILABLE_PAYMENT_METHODS_MAP: Record<
   PaymentMethodName,
   PaymentMethodInformation
 > = {
-  STRIPE: {
-    name: 'Stripe',
-    value: 'STRIPE',
-    icon: '/payment/stripe.png',
-    component: StripePayment,
-  },
+  // STRIPE: {
+  //   name: 'Stripe',
+  //   value: 'STRIPE',
+  //   icon: '/payment/stripe.png',
+  //   component: StripePayment,
+  // },
   CASH_ON_DELIVERY: {
     name: 'Cash On Delivery',
     value: 'CASH_ON_DELIVERY',
@@ -57,21 +57,21 @@ const PaymentGrid: React.FC<{ className?: string; theme?: 'bw' }> = ({
       ) : null}
 
       <RadioGroup value={gateway} onChange={setGateway}>
-        <RadioGroup.Label className="text-base text-heading font-semibold mb-5 block">
+        <RadioGroup.Label className="mb-5 block text-base font-semibold text-heading">
           {t('text-choose-payment')}
         </RadioGroup.Label>
 
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 mb-8">
+        <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-3">
           {Object.values(AVAILABLE_PAYMENT_METHODS_MAP).map(
             ({ name, icon, value }) => (
               <RadioGroup.Option value={value} key={value}>
                 {({ checked }) => (
                   <div
                     className={cn(
-                      'w-full h-full py-3 flex items-center justify-center border text-center rounded cursor-pointer relative bg-light border-gray-200',
-                      checked && 'bg-light !border-accent shadow-600',
+                      'relative flex h-full w-full cursor-pointer items-center justify-center rounded border border-gray-200 bg-light py-3 text-center',
+                      checked && '!border-accent bg-light shadow-600',
                       {
-                        'bg-light !border-gray-800 shadow-600':
+                        '!border-gray-800 bg-light shadow-600':
                           theme === 'bw' && checked,
                       }
                     )}
@@ -82,7 +82,7 @@ const PaymentGrid: React.FC<{ className?: string; theme?: 'bw' }> = ({
                         <img src={icon} alt={name} className="h-[30px]" />
                       </>
                     ) : (
-                      <span className="text-xs text-heading font-semibold">
+                      <span className="text-xs font-semibold text-heading">
                         {name}
                       </span>
                     )}

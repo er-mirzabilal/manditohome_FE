@@ -5,6 +5,7 @@ import { useAtom, WritableAtom } from 'jotai';
 import AddressCard from '@/components/address/address-card';
 import { AddressHeader } from '@/components/address/address-header';
 import { useTranslation } from 'next-i18next';
+import { useEffect } from 'react';
 
 interface AddressesProps {
   addresses: Address[] | undefined;
@@ -23,8 +24,16 @@ export const GuestAddressGrid: React.FC<AddressesProps> = ({
   count,
   type,
 }) => {
+  console.log(addresses, 'addresses');
   const { t } = useTranslation('common');
   const [selectedAddress, setAddress] = useAtom(atom);
+  useEffect(() => {
+    if (addresses?.length && !selectedAddress) {
+
+      setAddress(addresses[0]);
+    }
+  }, [addresses]);
+  console.log(selectedAddress, 'selectedAddress');
   const { openModal } = useModalAction();
 
   function onAdd() {
