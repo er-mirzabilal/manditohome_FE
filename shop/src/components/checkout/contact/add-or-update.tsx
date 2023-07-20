@@ -20,16 +20,18 @@ export default function AddOrUpdateContact() {
     closeModal();
   }
   return (
-    <div className="flex flex-col justify-center min-h-screen p-5 bg-light sm:p-8 md:min-h-0 md:rounded-xl">
-      <h1 className="mb-5 text-sm font-semibold text-center text-heading sm:mb-6">
+    <div className="flex min-h-screen flex-col justify-center bg-light p-5 sm:p-8 md:min-h-0 md:rounded-xl">
+      <h1 className="mb-5 text-center text-sm font-semibold text-heading sm:mb-6">
         {contactNumber ? t('text-update') : t('text-add-new')}{' '}
         {t('text-contact-number')}
       </h1>
-      {useOtp ? (
+      {/* {useOtp ? (
         <OtpForm phoneNumber={contactNumber} onVerifySuccess={onSubmit} />
       ) : (
         <PhoneNumberForm onSubmit={onSubmit} phoneNumber={contactNumber} />
-      )}
+      )} */}
+
+      <PhoneNumberForm onSubmit={onSubmit} phoneNumber={contactNumber} />
     </div>
   );
 }

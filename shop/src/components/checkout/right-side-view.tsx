@@ -20,5 +20,4 @@ export const RightSideView = ({
   }
   return <VerifiedItemList />;
 };
-
 export default RightSideView;
