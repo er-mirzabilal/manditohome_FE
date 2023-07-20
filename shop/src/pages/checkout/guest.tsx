@@ -29,6 +29,7 @@ const RightSideView = dynamic(
 
 export default function GuestCheckoutPage() {
   interface Address {
+    title: string;
     town: string;
     street: string;
   }
@@ -58,23 +59,6 @@ export default function GuestCheckoutPage() {
     }
   }, []);
 
-  const defaultAddress = {
-    title: '',
-    type: 'shipping',
-    address: {
-      town: storedAddresses?.town || 'dummy',
-      street_address: storedAddresses?.street || 'St  dummy',
-    },
-  };
-  // const defaultAddress = {
-  //   title: '',
-  //   type: 'shipping',
-  //   address: {
-  //     town: storedAddresses?.[0]?.town || 'dummy', // Accessing the first address in the array
-  //     street_address: storedAddresses?.[0]?.street || 'St dummy', // Accessing the first address in the array
-  //   },
-  // };
-
   return (
     <>
       <Seo noindex={true} nofollow={true} />
@@ -101,7 +85,9 @@ export default function GuestCheckoutPage() {
               label={t('text-shipping-address')}
               count={2}
               // addresses={shippingAddress ? [shippingAddress] : []}
-              addresses={shippingAddress ? [shippingAddress] : [defaultAddress]}
+              addresses={
+                shippingAddress ? [shippingAddress] : [storedAddresses]
+              }
               atom={shippingAddressAtom}
               type={AddressType.Shipping}
             />

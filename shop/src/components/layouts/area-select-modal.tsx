@@ -18,7 +18,14 @@ const AreaSelectModal = () => {
     if (userArea.length && userStreet.length) {
       localStorage.setItem(
         'user_area',
-        JSON.stringify({ town: userArea, street: userStreet })
+        JSON.stringify({
+          title: '',
+          type: 'shipping',
+          address: {
+            town: userArea,
+            street_address: userStreet,
+          },
+        })
       );
       closeModal();
     } else {
@@ -38,7 +45,6 @@ const AreaSelectModal = () => {
       <p className="mt-4 mb-8 text-center text-sm text-body sm:mt-5 sm:mb-10 md:text-base">
         {t('town-select-helper')}
       </p>
-
       {/* <select className="rounded border-gray-300">
     {
         TownTypes.map((town,index)=><option value={town} key={index}>{town}</option>)
@@ -66,7 +72,7 @@ const AreaSelectModal = () => {
         }}
         error={streetError}
         label="Street Address"
-        style={{marginTop:'5px'}}
+        style={{ marginTop: '5px' }}
       />
       <div className="mt-8">
         <Button onClick={handleAreaSelect} className="h-11 w-full sm:h-12">

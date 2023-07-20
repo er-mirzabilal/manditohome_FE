@@ -66,10 +66,10 @@ export const PlaceOrderAction: React.FC<{ className?: string }> = (props) => {
       setErrorMessage('Gateway Is Required');
       return;
     }
-    if (!use_wallet_points && payment_gateway === 'STRIPE' && !token) {
-      setErrorMessage('Please Pay First');
-      return;
-    }
+    // if (!use_wallet_points && payment_gateway === 'STRIPE' && !token) {
+    //   setErrorMessage('Please Pay First');
+    //   return;
+    // }
     let input = {
       //@ts-ignore
       products: available_items?.map((item) => formatOrderedProduct(item)),
@@ -92,10 +92,10 @@ export const PlaceOrderAction: React.FC<{ className?: string }> = (props) => {
         ...(shipping_address?.address && shipping_address.address),
       },
     };
-    if (payment_gateway === 'STRIPE') {
-      //@ts-ignore
-      input.token = token;
-    }
+    // if (payment_gateway === 'STRIPE') {
+    //   //@ts-ignore
+    //   input.token = token;
+    // }
 
     // delete input.billing_address.__typename;
     delete input.shipping_address.__typename;
