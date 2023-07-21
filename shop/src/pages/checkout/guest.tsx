@@ -38,13 +38,10 @@ export default function GuestCheckoutPage() {
   const [, resetCheckout] = useAtom(clearCheckoutAtom);
   const [billingAddress] = useAtom(billingAddressAtom);
   const [shippingAddress] = useAtom(shippingAddressAtom);
-  console.log(shippingAddress);
   useEffect(() => {
     resetCheckout();
   }, [resetCheckout]);
   const [storedAddresses, setStoredAddresses] = useState<Address[]>();
-
-  console.log(storedAddresses, 'storedAddresses');
 
   useEffect(() => {
     const addressesFromStorage = localStorage.getItem('user_area');
